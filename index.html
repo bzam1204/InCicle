@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caluladora de Medidas</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .xvh {
+        width: fit-content;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 24px;
+        padding: 0 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .xvw {
+        padding: 0 1rem;
+        width: fit-content;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 24px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Calculadora de Medidas</h1>
+    <label for="Largura">Largura do Dispositivo</label><br />
+    <input
+      class="larguraInput"
+      type="number"
+      name="Largura"
+      id=""
+      value="820"
+    /><br />
+
+    <label for="altura">Altura do Dispositivo</label><br />
+    <input
+      class="alturaInput"
+      type="number"
+      name="altura"
+      id=""
+      value="1180"
+    /><br />
+
+    <label for="valor">Valor</label><br />
+    <input
+      autofocus="autofocus"
+      class="valor"
+      type="number"
+      name="valor"
+      id=""
+    /><br /><br />
+
+    <label class="xvw" for="">largura</label> <br /><br />
+    <label class="xvh" for="">Altura</label><br /><br />
+    <script>
+      async function clipboardCopy(seletor) {
+        let text = document.querySelector(`${seletor}`).textContent;
+        await navigator.clipboard.writeText(text);
+      }
+      const larguraInput = document.querySelector(".larguraInput");
+      const alturaInput = document.querySelector(".alturaInput");
+      const valor = document.querySelector(".valor");
+      const xvw = document.querySelector(".xvw");
+      const xvh = document.querySelector(".xvh");
+
+      valor.addEventListener("input", () => {
+        const largura = larguraInput.value;
+        const altura = alturaInput.value;
+        const numero = valor.value;
+
+        let xvh = (numero * 100) / altura;
+        let xvw = (numero * 100) / largura;
+
+        document.querySelector(".xvw").innerHTML = xvw.toFixed(2) + "vw";
+        document.querySelector(".xvh").innerHTML = xvh.toFixed(2) + "vh";
+        clipboardCopy(".xvw");
+      });
+      xvh.addEventListener("click", () => {
+        clipboardCopy(".xvh");
+      });
+
+      xvw.addEventListener("click", () => {
+        clipboardCopy(".xvw");
+      });
+    </script>
+  </body>
+</html>
